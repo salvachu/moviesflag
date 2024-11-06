@@ -1,3 +1,6 @@
+Go to https://www.omdbapi.com/apikey.aspx
+To get a new API Key (Free) and replace in the line 6 of app.py file
 Run
 pip install flask
 python app.py
+go to http://127.0.0.1:5000/?filter=transformers
