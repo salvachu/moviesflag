@@ -43,7 +43,7 @@ def merge_data_with_flags(filter):
          countries = []
          for country in countriesNames:
             countrywithflag = {
-                "name": country,
+                "name": country.strip(),
                 "flag": get_country_flag(country.strip())
             }
             countries.append(countrywithflag)
