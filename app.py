@@ -3,7 +3,7 @@ import requests
 import json
 
 app = Flask(__name__)
-apikey = "a2c21c91"
+apikey = "<apikey>"
 
 def searchfilms(search_text):
     url = "https://www.omdbapi.com/?s=" + search_text + "&apikey=" + apikey
