@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from app import app, getmoviedetails, get_country_flag
+from app import app, getmoviedetails, get_country_flag_async
 
 class MovieWithFlagAppTestCase(unittest.TestCase):
 
@@ -61,15 +61,15 @@ class MovieWithFlagAppTestCase(unittest.TestCase):
             self.assertEqual(movie["countries"][2]["flag"], "https://flagcdn.com/ca.svg")
             self.assertEqual(movie["countries"][3]["flag"], "https://flagcdn.com/fr.svg")
 
-    @patch("app.get_country_flag")
+    @patch("app.get_country_flag_async")
     @patch("app.getmoviedetails")
-    def test_movie_searchapi(self, mock_getmoviedetails, mock_get_country_flag):
+    def test_movie_searchapi(self, mock_getmoviedetails, mock_get_country_flag_async):
         mock_getmoviedetails.return_value = {
             "Title": "Superman II",
             "Year": "1980",
             "Country": "United States, United Kingdom, Canada, France",
         }
-        mock_get_country_flag.return_value = "https://flagcdn.com/us.svg"
+        mock_get_country_flag_async.return_value = "https://flagcdn.com/us.svg"
 
         response = self.client.get("/api/movies?filter=superman")
         self.assertEqual(response.status_code, 200)
