@@ -1,0 +1,73 @@
+pruebas de estres con apache benchmarks (ab)
+
+install:
+sudo apt update
+sudo apt install apache2-utils
+
+input: ab -n 1000 -c 10 http://127.0.0.1:5000/?filter=batman
+
+tq -n = numero de solicitudes y -c = numero de usuarios concurrentes
+
+outpput:
+
+Benchmarking 127.0.0.1 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Werkzeug/2.2.2
+Server Hostname:        127.0.0.1
+Server Port:            5000
+
+Document Path:          /?filter=batman
+Document Length:        5754 bytes
+
+Concurrency Level:      10
+Time taken for tests:   45.635 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      5929000 bytes
+HTML transferred:       5754000 bytes
+Requests per second:    21.91 [#/sec] (mean)
+Time per request:       456.349 [ms] (mean)
+Time per request:       45.635 [ms] (mean, across all concurrent requests)
+Transfer rate:          126.88 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:   206  448 158.8    453    2985
+Waiting:      206  448 158.8    453    2985
+Total:        206  448 158.8    453    2985
+
+Percentage of the requests served within a certain time (ms)
+  50%    453
+  66%    469
+  75%    482
+  80%    490
+  90%    515
+  95%    553
+  98%    837
+  99%   1232
+ 100%   2985 (longest request)
+
+ Conclusión del Análisis
+
+    Rendimiento:
+        el sv manejo 21.91 solicitudes por segundo
+        El tiempo promedio de respuesta (456 ms) esta bien, pero podria mejorarse si se reduce el tiempo de procesamiento en operaciones externas, como solicitudes a la API o accesos a la bd.
+
+    Picos de Lentas Respuestas:
+        Algunas solicitudes tardaron hasta 2985 ms, lo que indica que hay operaciones que pueden ralentizarse bajo carga.
+
+    Sin Fallos:
+        No hubo solicitudes fallidas, lo que muestra que tu servidor es estable bajo esta carga.
